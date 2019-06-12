@@ -1,4 +1,3 @@
 -D base=0.0.0
-# @install: lix --silent download "gh://github.com/skial/base#b4f09e05f1afc1f97a4869d1ea465e013fd12644" into base/0.0.0/github/b4f09e05f1afc1f97a4869d1ea465e013fd12644
-#-cp ${HAXE_LIBCACHE}/base/0.0.0/github/b4f09e05f1afc1f97a4869d1ea465e013fd12644/src
--cp ../base/src
+# @install: lix --silent download "gh://github.com/skial/base#d71d0c2afa93a677f68d6b256dec83d97cd47e81" into base/0.0.0/github/d71d0c2afa93a677f68d6b256dec83d97cd47e81
+-cp ${HAXE_LIBCACHE}/base/0.0.0/github/d71d0c2afa93a677f68d6b256dec83d97cd47e81/src

@@ -1,6 +1,39 @@
 -lib base
+-lib tink_core
+-lib tink_unittest
 
 -cp src
 -cp tests
 
 -main Main
+
+-debug
+-dce full
+-D analyzer-optimize
+
+--each
+
+-lib hxnodejs
+-js bin/mb.js
+
+#--next
+## Values with 0x00 in them fail on HashLink. I'm thinking hl code detects 0x00 and just stops further processing.
+#-hl bin/mb.hl
+
+--next
+
+-python bin/mb.py
+
+--next
+
+-php bin/php
+
+--next
+
+-lib hxjava
+-java bin/java
+
+--next
+
+-lib hxcs
+-cs bin/cs

@@ -1,6 +1,9 @@
 package multibase;
 
+@:forward
+@:forwardStatics
 enum abstract Code(String) from String to String {
+    public var Id = '\x00';
     public var Base1 = '1';
     public var Base2 = '0';
     public var Base8 = '7';
@@ -23,8 +26,23 @@ enum abstract Code(String) from String to String {
     public var Base64Url = 'u';
     public var Base64UrlPad = 'U';
 
-    @:to public inline function toIdentity():Identity {
+    public static inline function isValid(v:String):Bool {
+        return if (v.length == 1) switch v {
+            case Id, Base1, Base2, Base8, Base10, Base16, Base16Upper, Base32Hex, Base32HexUpper, Base32HexPad, Base32HexPadUpper, Base32, Base32Upper, Base32Pad, Base32PadUpper, Base32Z, Base58Flickr, Base58Btc, Base64, Base64Pad, Base64Url, Base64UrlPad:
+                true;
+
+            case _:
+                false;
+
+        } else {
+            false;
+
+        }
+    }
+
+    @:to public inline function asIdentity():Identity {
         return switch this {
+            case Id: Identity.Id;
             case Base1: Identity.Base1;
             case Base2: Identity.Base2;
             case Base8: Identity.Base8;
@@ -49,4 +67,33 @@ enum abstract Code(String) from String to String {
             case _: '-_-';
         }
     }
+
+    @:from private static inline function fromInt(code:Int):Code {
+        return switch (code) {
+            case 0x00: Id;
+            case '1'.code: Base1;
+            case '0'.code: Base2;
+            case '7'.code: Base8;
+            case '9'.code: Base10;
+            case 'f'.code: Base16;
+            case 'F'.code: Base16Upper;
+            case 'v'.code: Base32Hex;
+            case 'V'.code: Base32HexUpper;
+            case 't'.code: Base32HexPad;
+            case 'T'.code: Base32HexPadUpper;
+            case 'b'.code: Base32;
+            case 'B'.code: Base32Upper;
+            case 'c'.code: Base32Pad;
+            case 'C'.code: Base32PadUpper;
+            case 'h'.code: Base32Z;
+            case 'Z'.code: Base58Flickr;
+            case 'z'.code: Base58Btc;
+            case 'm'.code: Base64;
+            case 'M'.code: Base64Pad;
+            case 'u'.code: Base64Url;
+            case 'U'.code: Base64UrlPad;
+            case _: '_';
+        }
+    }
+
 }

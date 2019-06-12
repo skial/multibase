@@ -1,6 +1,9 @@
 package multibase;
 
-enum abstract Identity(String) from String {
+@:forward
+@:forwardStatics
+enum abstract Identity(String) from String to String {
+    public var Id = 'identity';
     public var Base1 = 'base1';
     public var Base2 = 'base2';
     public var Base8 = 'base8';
@@ -21,11 +24,11 @@ enum abstract Identity(String) from String {
     public var Base64 = 'base64';
     public var Base64Pad = 'base64pad';
     public var Base64Url = 'base64url';
-    public var Base64UrlPad = 'base64urlpa';
+    public var Base64UrlPad = 'base64urlpad';
 
     public static inline function isValid(v:String):Bool {
         return if (v.length > 4) switch v {
-            case Base1, Base2, Base8, Base10, Base16, Base16Upper, Base32Hex, Base32HexUpper, Base32HexPad, Base32HexPadUpper, Base32, Base32Upper, Base32Pad, Base32PadUpper, Base32Z, Base58Flickr, Base58Btc, Base64, Base64Pad, Base64Url, Base64UrlPad:
+            case Id, Base1, Base2, Base8, Base10, Base16, Base16Upper, Base32Hex, Base32HexUpper, Base32HexPad, Base32HexPadUpper, Base32, Base32Upper, Base32Pad, Base32PadUpper, Base32Z, Base58Flickr, Base58Btc, Base64, Base64Pad, Base64Url, Base64UrlPad:
                 true;
 
             case _:
@@ -37,8 +40,9 @@ enum abstract Identity(String) from String {
         }
     }
 
-    @:to public inline function toCode():Code {
+    @:to public inline function asCode():Code {
         return switch this {
+            case Id: Code.Id;
             case Base1: Code.Base1;
             case Base2: Code.Base2;
             case Base8: Code.Base8;
