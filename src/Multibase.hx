@@ -28,7 +28,7 @@ class Multibase {
 
     public var table:Map<Identity, Lazy<TBase>> = @:privateAccess [
         Id => Lazy.ofConst( (new IdPass():TBase) ),
-        //Base1 => 
+        // Base1 not supported.
         Base2 => Lazy.ofConst( (new Base2():TBase) ),
         //Base8 => Lazy.ofConst( (new Base8ZC():TBase) ),
         Base10 => Lazy.ofConst( (new Base10():TBase) ),

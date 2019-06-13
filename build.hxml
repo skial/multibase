@@ -37,3 +37,16 @@
 
 -lib hxcs
 -cs bin/cs
+
+#--next
+
+#-cpp bin/cpp
+
+#--next
+
+# stackoverflow
+#-neko bin/base.n
+
+--next
+
+--interp
